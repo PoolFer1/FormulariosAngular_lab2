@@ -1,0 +1,11 @@
+<p>
+    Email: <br>
+    <input type="email" [formControl]="emailCtrl">  
+</p>
+<p *ngIf="emailCtrl.errors && emailCtrl.dirty">
+    <small *ngIf="emailCtrl.hasError('required')">El campo es requerido</small>
+    <small *ngIf="emailCtrl.hasError('minlength')">Este campo debe tener mínimo 10 caracteres</small>
+    <small *ngIf="emailCtrl.hasError('email')">Este campo debe ser un correo electrónico</small>
+</p>
+<button [disabled]="emailCtrl.invalid" type="button" (click)="getEmail($event)">Save</button>
+

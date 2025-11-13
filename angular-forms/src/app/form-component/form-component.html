@@ -1,0 +1,75 @@
+<form [formGroup]="form" (ngSubmit)="save($event)">
+  <p>
+    Nombre: <br>
+    <input type="text" formControlName="name">
+    <small *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">
+      El campo es requerido
+    </small>
+  </p>
+
+  <p>
+    Cédula: <br>
+    <input type="text" formControlName="number" maxlength="10" inputmode="numeric" pattern="[0-9]*">
+  </p>
+  <div *ngIf="form.get('number')?.errors && form.get('number')?.touched">
+    <small *ngIf="form.get('number')?.hasError('required')">El campo es requerido</small><br>
+    <small *ngIf="form.get('number')?.hasError('minlength')">Debe tener mínimo 10 dígitos</small><br>
+    <small *ngIf="form.get('number')?.hasError('maxlength')">Debe tener máximo 10 dígitos</small>
+  </div>
+
+  <p>
+    Fecha de nacimiento: <br>
+    <input type="date" formControlName="date">
+    <small *ngIf="form.get('date')?.hasError('required') && form.get('date')?.touched">
+      El campo es requerido
+    </small>
+  </p>
+
+  <p>
+    Email: <br>
+    <input type="email" formControlName="email">
+  </p>
+  <div *ngIf="form.get('email')?.errors && form.get('email')?.touched">
+    <small *ngIf="form.get('email')?.hasError('required')">El campo es requerido</small><br>
+    <small *ngIf="form.get('email')?.hasError('minlength')">Debe tener mínimo 10 caracteres</small><br>
+    <small *ngIf="form.get('email')?.hasError('email')">Debe ser un correo electrónico válido</small>
+  </div>
+
+  <p>
+    País: <br>
+    <select formControlName="category">
+      <option value="">Seleccione un país</option>
+      <option value="ecuador">Ecuador</option>
+      <option value="colombia">Colombia</option>
+      <option value="peru">Perú</option>
+      <option value="chile">Chile</option>    
+    </select>
+  </p>
+
+  <p>
+    Género: <br>
+    <input type="radio" formControlName="gender" value="hombre" name="gender"> Hombre <br>
+    <input type="radio" formControlName="gender" value="mujer" name="gender"> Mujer <br>
+    <input type="radio" formControlName="gender" value="otro" name="gender"> Otro
+  </p>
+
+  <p>
+    Biografía: <br>
+    <textarea cols="30" rows="5" formControlName="text"></textarea>
+  </p>
+  <div *ngIf="form.get('text')?.errors && form.get('text')?.touched">
+    <small *ngIf="form.get('text')?.hasError('required')">El campo es requerido</small><br>
+    <small *ngIf="form.get('text')?.hasError('minlength')">Debe tener mínimo 10 caracteres</small><br>
+    <small *ngIf="form.get('text')?.hasError('maxlength')">Debe tener máximo 500 caracteres</small><br>
+  </div>    
+
+  <p>
+    Términos y condiciones:
+    <input type="checkbox" formControlName="terms">
+    <small *ngIf="form.get('terms')?.hasError('requiredTrue') && form.get('terms')?.touched">
+      Debe aceptar los términos y condiciones
+    </small>
+  </p>
+
+  <button type="submit" [disabled]="form.invalid">Guardar</button>
+</form>
